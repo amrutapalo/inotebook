@@ -17,34 +17,29 @@ const NoteState = (props) => {
       title: "Call Passport Agent",
       description:"search aadhar card",
       id: 3,
-    },
-    {
-      title: "Call Passport Agent",
-      description:"ghfchyfyuruytuy yvtuvtutut uituitu7tuitv yrryeyrku htyrtetdhyjt",
-      id: 3,
-    },
-    {
-      title: "Call Passport Agent",
-      description:"search aadhar card ituitu7tuitv yrryeyrku htyrtetdhy",
-      id: 3,
-    },
-    {
-        title: "Call Passport Agent",
-        description:"search aadhar card",
-        id: 3,
-      },
+    }
   ]);
 
   //addNote
   const addNote = (note) => {
-    console.log("NoteState: addNote called -- ",note);
+    console.log("NoteState: addNote called -- note: ",note);
     // list.push(note);
-    setList(list.concat(note));
+    setList(list.concat({...note, id:list[list.length-1].id + 1}));
     console.log("list --", list);
   }
+  
+  const deleteNote = (id) => {
+    console.log("NoteState: deleteNote called -- id: ",id);
+    setList(list.filter((note) => {
+      return (note.id !== id)
+    }))   
+    console.log("after-",list);
+  }
+
+  //deleteNote
 
   return (
-    <NoteContext.Provider value={{list, addNote}}>
+    <NoteContext.Provider value={{list, addNote, deleteNote}}>
       {props.children}
     </NoteContext.Provider>
   );
