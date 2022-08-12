@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
 import NoteContext from "../context/NoteContext";
+import EditNoteModal from "./EditNoteModal";
 import NoteItem from "./NoteItem";
 
 const DisplayNotes = () => {
   const state = useContext(NoteContext);
-  console.log("Display Notes: list received: ",state.list);
+  console.log("Display Notes: list received: ", state.list);
 
   const onDelete = (id) => {
     state.deleteNote(id);
-  }
+  };
+
+  const onUpdate = (id) => {};
   return (
     <div className="container my-5 row">
       <h3>Your Notes</h3>
-
+      <EditNoteModal></EditNoteModal>
       <div className="row row-cols-md-3 row-cols-lg-4">
         {state.list.map((element) => {
           return (
@@ -20,7 +23,9 @@ const DisplayNotes = () => {
               <NoteItem
                 title={element.title}
                 description={element.description}
-                onDelete={() => {onDelete(element.id)}}
+                onDelete={() => {
+                  onDelete(element.id);
+                }}
               ></NoteItem>
             </div>
           );
