@@ -3,7 +3,7 @@ import NoteContext from "../context/NoteContext";
 import NoteItem from "./NoteItem";
 
 const DisplayNotes = () => {
-  const list = useContext(NoteContext);
+  const list = useContext(NoteContext).list;
   console.log(list);
   return (
     <div className="container my-5 row">

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
-  const state = [
+  const [list, setList] = useState( [
     {
       title: "Complete Hooks",
       description:"Code with harry - 10 videos",
@@ -33,10 +33,18 @@ const NoteState = (props) => {
         description:"search aadhar card",
         id: 3,
       },
-  ];
+  ]);
+
+  //addNote
+  const addNote = (note) => {
+    console.log("NoteState: addNote called -- ",note);
+    // list.push(note);
+    setList(list.concat(note));
+    console.log("list --", list);
+  }
 
   return (
-    <NoteContext.Provider value={state}>
+    <NoteContext.Provider value={{list, addNote}}>
       {props.children}
     </NoteContext.Provider>
   );
