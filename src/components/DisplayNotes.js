@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState,useEffect } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import NoteContext from "../context/NoteContext";
 import EditNoteModal from "./EditNoteModal";
 import NoteItem from "./NoteItem";
@@ -8,7 +8,7 @@ const DisplayNotes = () => {
   console.log("Display Notes: list received: ", state.list);
 
   const [note, setNote] = useState({
-    id:"",
+    id: "",
     title: "",
     description: "",
   });
@@ -17,16 +17,20 @@ const DisplayNotes = () => {
     state.deleteNote(id);
   };
 
-  const ref=useRef();
+  const ref = useRef();
   console.log(ref);
 
   const onUpdate = (element) => {
     console.log("DisplayNotes: onUpdate: ", element);
     setNote(element);
     ref.current.click();
-    console.log("ele:",element);
-    console.log("to be updated: ",note);
+    console.log("ele:", element);
+    console.log("to be updated: ", note);
     // state.updateNote(element);
+  };
+
+  const editNote = (element) => {
+    
   };
 
   return (
@@ -34,7 +38,7 @@ const DisplayNotes = () => {
       <h3>Your Notes</h3>
       {<EditNoteModal ref={ref} note={note}></EditNoteModal>}
       <div className="row row-cols-md-3 row-cols-lg-4">
-        {state.list.map((element) => {
+        {state.list && state.list.map((element) => {
           return (
             <div key={element.id}>
               <NoteItem
