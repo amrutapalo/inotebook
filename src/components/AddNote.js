@@ -11,7 +11,7 @@ const AddNote = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     // setNote({...note, [event.target.name] : event.target.value});
-    console.log(state);
+    console.log("Add Note: state:",state);
     state.addNote(note);
     setNote({
       title: "",
@@ -21,7 +21,6 @@ const AddNote = () => {
 
   const onChange = (event) => {
     setNote({ ...note, [event.target.name]: event.target.value });
-    console.log(note);
   };
 
   return (

@@ -29,16 +29,13 @@ const DisplayNotes = () => {
     // state.updateNote(element);
   };
 
-  const editNote = (element) => {
-    
-  };
-
   return (
     <div className="container my-5 row">
       <h3>Your Notes</h3>
       {<EditNoteModal ref={ref} note={note}></EditNoteModal>}
       <div className="row row-cols-md-3 row-cols-lg-4">
-        {state.list && state.list.map((element) => {
+        {state.list.length===0 && <h6>Start Adding Your Notes!</h6>}
+        {state.list!==0 && state.list.map((element) => {
           return (
             <div key={element.id}>
               <NoteItem
