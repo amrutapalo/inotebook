@@ -36,10 +36,37 @@ const NoteState = (props) => {
     console.log("after-",list);
   }
 
-  //deleteNote
+  const updateNote = (note) => {
+    console.log("NoteState: updateNote called -- note: ",note);
+    let updatedList = [];
+    try{
+
+      list.forEach((element) => {
+        console.log(element);
+        if(note.id == element.id){
+          element.title = note.title;
+          element.description = note.description;
+          console.log("check: ", element);
+          updatedList.push(element);
+          // throw new Error("Time to end the loop"); 
+        }else{
+          updatedList.push(element);
+        }
+      });
+    }catch(e){
+      console.log("Loop has ended");
+    }
+
+    setList(updatedList);
+    console.log(updatedList);
+    console.log(list);
+   
+  }
+
+  //updateNote
 
   return (
-    <NoteContext.Provider value={{list, addNote, deleteNote}}>
+    <NoteContext.Provider value={{list, addNote, deleteNote, updateNote}}>
       {props.children}
     </NoteContext.Provider>
   );
