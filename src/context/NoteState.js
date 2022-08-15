@@ -41,6 +41,11 @@ const NoteState = (props) => {
         ...note,
       })
     );
+
+    if (searchedList.length !== 0) {
+      setSearchedList([])
+    }
+    
     console.log("list --", list);
     localStorage.setItem(
       "list",

@@ -29,7 +29,7 @@ i {
   position: relative;
 }
 
-.data-list > a {
+.data-list > option{
   text-decoration: none;
   color: black;
   background-color: white;
@@ -38,6 +38,6 @@ i {
   border-top: none;
 }
 
-.data-list > a:hover {
-  background-color: rgb(236, 235, 235);
+.data-list > option:hover {
+  background-color: white;
 }

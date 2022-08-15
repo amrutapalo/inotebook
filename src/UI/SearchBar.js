@@ -45,17 +45,17 @@ const SearchBar = () => {
       </form>
 
       {datalistDisplay && displayData.length !== 0 && (
-        <div
+        <datalist
           className={`data-list ${datalistDisplay == false ? "d-none" : ""}`}
         >
           {displayData.map((element) => {
             return (
-              <a key={element.id} onClick={() => searchResult(element.id)}>
+              <option key={element.id} onClick={() => searchResult(element.id)}>
                 {element.title}
-              </a>
+              </option>
             );
           })}
-        </div>
+        </datalist>
       )}
     </div>
   );
