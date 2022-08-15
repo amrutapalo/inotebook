@@ -28,6 +28,9 @@ const NoteState = (props) => {
     // },
     initList
   );
+  const [searchedList, setSearchedList] = useState([]);
+
+
 
   //addNote
   const addNote = (note) => {
@@ -81,9 +84,19 @@ const NoteState = (props) => {
     localStorage.setItem("list",JSON.stringify(updatedList));
   };
 
-  //updateNote
+  //searchNote
+
+  const searchNote = (id) => {
+    console.log("searchNote: ",id);
+    let filterList = [];
+    filterList.push(list.find(x => x.id === id));
+    console.log("searchNote: ",filterList);
+    setSearchedList(filterList);
+    filterList = [];
+  }
+
   return (
-    <NoteContext.Provider value={{ list, addNote, deleteNote, updateNote }}>
+    <NoteContext.Provider value={{ list, searchedList, addNote, deleteNote, updateNote, searchNote }}>
       {props.children}
     </NoteContext.Provider>
   );

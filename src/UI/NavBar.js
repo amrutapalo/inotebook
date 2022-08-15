@@ -1,19 +1,11 @@
 import React, {useEffect} from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const NavBar = () => {
 
   const location = useLocation().pathname;
   console.log(location);
-  // useEffect(() => {
-  //   first
-  
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
-  
-
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,10 +23,7 @@ const NavBar = () => {
                 <Link className={`nav-link ${location=="/about" ? "active" : ""}`} to="/about">About</Link>
                 </li>
             </ul>
-            <form className="d-flex">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <SearchBar/>
             </div>
         </div>
     </nav>
