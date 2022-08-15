@@ -43,9 +43,9 @@ const NoteState = (props) => {
     );
 
     if (searchedList.length !== 0) {
-      setSearchedList([])
+      setSearchedList([]);
     }
-    
+
     console.log("list --", list);
     localStorage.setItem(
       "list",
@@ -68,7 +68,7 @@ const NoteState = (props) => {
     );
 
     if (searchedList.length !== 0) {
-      setSearchedList([])
+      setSearchedList([]);
     }
 
     console.log("after-", list);
@@ -111,11 +111,25 @@ const NoteState = (props) => {
 
   //searchNote
 
-  const searchNote = (id) => {
-    console.log("searchNote: ", id);
+  const searchNote = (element, type) => {
+    console.log("searchNote: ", element);
     let filterList = [];
-    filterList.push(list.find((x) => x.id === id));
-    console.log("searchNote: ", filterList);
+    if (type == "data-list") {
+      filterList.push(list.find((x) => x.id === element.id));
+    }
+
+    if (type == "button-click") {
+      console.log("-",element);
+      for (let item of list) {
+        if (item.title.toLowerCase().match(element)) {
+          console.log(element);
+          filterList.push(item);
+        }
+      }
+      // filterList.push(list.find((x) => x.title.toLowerCase().match(element)));
+      console.log(filterList);
+    }
+    console.log("searchNote-after: ", filterList);
     setSearchedList(filterList);
     filterList = [];
   };
