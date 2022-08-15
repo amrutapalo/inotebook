@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import NoteContext from "./NoteContext";
 
-const NoteState = (props) => { 
+const NoteState = (props) => {
   let updatedList;
   let initList;
-  if(localStorage.getItem("list")){
-   initList = JSON.parse(localStorage.getItem("list"));
-  }else{
-   initList=[];
+  if (localStorage.getItem("list")) {
+    initList = JSON.parse(localStorage.getItem("list"));
+  } else {
+    initList = [];
   }
 
   const [list, setList] = useState(
@@ -30,18 +30,28 @@ const NoteState = (props) => {
   );
   const [searchedList, setSearchedList] = useState([]);
 
-
-
   //addNote
   const addNote = (note) => {
     console.log("NoteState: addNote called -- note: ", note);
     // list.push(note);
     // let id = (list.length == 0) ? 1 : list[list.length - 1].id + 1;
-    setList(list.concat({id: (list.length == 0) ? 1 : list[list.length - 1].id + 1 ,  ...note}));
+    setList(
+      list.concat({
+        id: list.length == 0 ? 1 : list[list.length - 1].id + 1,
+        ...note,
+      })
+    );
     console.log("list --", list);
-    localStorage.setItem("list",JSON.stringify(list.concat({id: (list.length == 0) ? 1 : list[list.length - 1].id + 1 ,  ...note})));
+    localStorage.setItem(
+      "list",
+      JSON.stringify(
+        list.concat({
+          id: list.length == 0 ? 1 : list[list.length - 1].id + 1,
+          ...note,
+        })
+      )
+    );
   };
-
 
   //deleteNote
   const deleteNote = (id) => {
@@ -51,10 +61,20 @@ const NoteState = (props) => {
         return note.id !== id;
       })
     );
+
+    if (searchedList.length !== 0) {
+      setSearchedList([])
+    }
+
     console.log("after-", list);
-    localStorage.setItem("list",JSON.stringify(list.filter((note) => {
-      return note.id !== id;
-    })));
+    localStorage.setItem(
+      "list",
+      JSON.stringify(
+        list.filter((note) => {
+          return note.id !== id;
+        })
+      )
+    );
   };
 
   //updateNote
@@ -81,22 +101,31 @@ const NoteState = (props) => {
     setList(updatedList);
     console.log(updatedList);
     console.log(list);
-    localStorage.setItem("list",JSON.stringify(updatedList));
+    localStorage.setItem("list", JSON.stringify(updatedList));
   };
 
   //searchNote
 
   const searchNote = (id) => {
-    console.log("searchNote: ",id);
+    console.log("searchNote: ", id);
     let filterList = [];
-    filterList.push(list.find(x => x.id === id));
-    console.log("searchNote: ",filterList);
+    filterList.push(list.find((x) => x.id === id));
+    console.log("searchNote: ", filterList);
     setSearchedList(filterList);
     filterList = [];
-  }
+  };
 
   return (
-    <NoteContext.Provider value={{ list, searchedList, addNote, deleteNote, updateNote, searchNote }}>
+    <NoteContext.Provider
+      value={{
+        list,
+        searchedList,
+        addNote,
+        deleteNote,
+        updateNote,
+        searchNote,
+      }}
+    >
       {props.children}
     </NoteContext.Provider>
   );

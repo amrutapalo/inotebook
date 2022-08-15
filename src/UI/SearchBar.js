@@ -4,13 +4,15 @@ import NoteContext from "../context/NoteContext";
 const SearchBar = () => {
   const state = useContext(NoteContext);
   const [displayData, setDisplayData] = useState([]);
-  const [enteredValue, setEnteredValue] = useState(null);
+  const [datalistDisplay, setDatalistDisplay] = useState(false);
+
+  document.addEventListener('click', () => {setDatalistDisplay(false);});
 
   let displayList = [];
+
   const handleEnteredSearchValue = (event) => {
     console.log(event.target.value);
-    setEnteredValue(event.target.value);
-
+    setDatalistDisplay(true);
     for (let element of state.list) {
       if (element.title.toLowerCase().match(event.target.value)) {
         displayList.push(element);
@@ -22,10 +24,8 @@ const SearchBar = () => {
   };
 
   const searchResult = (id) => {
-        // event.preventDefault();
-
-        // console.log(id);
-      state.searchNote(id);
+    state.searchNote(id);
+    setDatalistDisplay(false);
   };
 
   return (
@@ -37,20 +37,20 @@ const SearchBar = () => {
           placeholder="Search"
           aria-label="Search"
           onKeyUp={handleEnteredSearchValue}
+          onBlur={() => {
+            console.log("onBlur: ", displayData);
+          }}
         />
-        <button className="btn btn-outline-success" type="submit">
-          Search
-        </button>
+        <button className="btn btn-outline-success">Search</button>
       </form>
 
-      {displayData.length !== 0 && (
-        <div className="data-list">
+      {datalistDisplay && displayData.length !== 0 && (
+        <div
+          className={`data-list ${datalistDisplay == false ? "d-none" : ""}`}
+        >
           {displayData.map((element) => {
             return (
-              <a
-                key={element.id}
-                onClick={() => searchResult(element.id)}
-              >
+              <a key={element.id} onClick={() => searchResult(element.id)}>
                 {element.title}
               </a>
             );
