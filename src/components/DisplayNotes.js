@@ -3,7 +3,7 @@ import NoteContext from "../context/NoteContext";
 import EditNoteModal from "./EditNoteModal";
 import NoteItem from "./NoteItem";
 
-const DisplayNotes = () => {
+const DisplayNotes = (props) => {
   const state = useContext(NoteContext);
   console.log("Display Notes: list received: ", state.list);
 
@@ -15,6 +15,7 @@ const DisplayNotes = () => {
 
   const onDelete = (id) => {
     state.deleteNote(id);
+    props.showAlert("danger", "Deleted Successfully");
   };
 
   const ref = useRef();
@@ -32,25 +33,32 @@ const DisplayNotes = () => {
   return (
     <div className="container my-5 row">
       <h3>Your Notes</h3>
-      {<EditNoteModal ref={ref} note={note}></EditNoteModal>}
-      <div className="row row-cols-md-3 row-cols-lg-4">
-        {state.list.length===0 && <h6>Start Adding Your Notes!</h6>}
-        {state.list!==0 && state.list.map((element) => {
-          return (
-            <div key={element.id}>
-              <NoteItem
-                title={element.title}
-                description={element.description}
-                onDelete={() => {
-                  onDelete(element.id);
-                }}
-                onUpdate={() => {
-                  onUpdate(element);
-                }}
-              ></NoteItem>
-            </div>
-          );
-        })}
+      {
+        <EditNoteModal
+          ref={ref}
+          note={note}
+          showAlert={props.showAlert}
+        ></EditNoteModal>
+      }
+      <div className="row row-cols-md-3 row-cols-lg-4 row-cols-xs-2">
+        {state.list.length === 0 && <h6>Start Adding Your Notes!</h6>}
+        {state.list !== 0 &&
+          state.list.map((element) => {
+            return (
+              <div key={element.id} className="my-1">
+                <NoteItem
+                  title={element.title}
+                  description={element.description}
+                  onDelete={() => {
+                    onDelete(element.id);
+                  }}
+                  onUpdate={() => {
+                    onUpdate(element);
+                  }}
+                ></NoteItem>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

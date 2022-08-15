@@ -34,9 +34,9 @@ const NoteState = (props) => {
     console.log("NoteState: addNote called -- note: ", note);
     // list.push(note);
     // let id = (list.length == 0) ? 1 : list[list.length - 1].id + 1;
-    setList(list.concat({ ...note, id: (list.length == 0) ? 1 : list[list.length - 1].id + 1 }));
+    setList(list.concat({id: (list.length == 0) ? 1 : list[list.length - 1].id + 1 ,  ...note}));
     console.log("list --", list);
-    localStorage.setItem("list",JSON.stringify(list.concat({ ...note, id: (list.length == 0) ? 1 : list[list.length - 1].id + 1 })));
+    localStorage.setItem("list",JSON.stringify(list.concat({id: (list.length == 0) ? 1 : list[list.length - 1].id + 1 ,  ...note})));
   };
 
 

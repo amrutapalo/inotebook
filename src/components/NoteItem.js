@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 const NoteItem = (props) => {
 
   return (
-    <div className="card m-3">
+    <div className="card m-1 h-100">
     <div className="card-body">
       <h6 className="card-subtitle mb-2 text-muted">{props.title}</h6>
       <p className="card-text">{props.description}</p>

@@ -25,6 +25,7 @@ const EditNoteModal = forwardRef((props, ref) => {
     // setNote({...note, [event.target.name] : event.target.value});
     console.log("EditNoteModal: onSubmit:", state);
     state.updateNote(note);
+    props.showAlert("success", "Note Updated Successfully")
   };
 
   const onChange = (event) => {
