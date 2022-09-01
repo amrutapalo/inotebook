@@ -5,7 +5,8 @@ import NoteItem from "./NoteItem";
 
 const DisplayNotes = (props) => {
   const state = useContext(NoteContext);
-  console.log("Display Notes: list received: ", state.list);
+  const renderedList = (state.searchedList.length == 0) ? state.list : state.searchedList;
+  console.log("Display Notes: list received: ", renderedList);
 
   const [note, setNote] = useState({
     id: "",
@@ -41,9 +42,9 @@ const DisplayNotes = (props) => {
         ></EditNoteModal>
       }
       <div className="row row-cols-md-3 row-cols-lg-4 row-cols-xs-2">
-        {state.list.length === 0 && <h6>Start Adding Your Notes!</h6>}
-        {state.list !== 0 &&
-          state.list.map((element) => {
+        {renderedList.length === 0 && <h6>Start Adding Your Notes!</h6>}
+        {renderedList !== 0 &&
+          renderedList.map((element) => {
             return (
               <div key={element.id} className="my-1">
                 <NoteItem

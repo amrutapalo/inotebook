@@ -1,12 +1,43 @@
-i{
-    margin: 5px;
-    font-size: 1.2em;
+i {
+  margin: 5px;
+  font-size: 1.2em;
 }
 
-.card{
-    background-color: rgb(248, 248, 148);
+.card {
+  background-color: rgb(248, 248, 148);
 }
 
 .fa-solid:hover {
-    color: rgb(107, 105, 105);
+  color: rgb(107, 105, 105);
+}
+
+.search-container {
+  height: 40px;
+  /* display: flex;
+    flex-direction: column; */
+}
+
+.data-list {
+  display: flex;
+  flex-direction: column;
+  height: min-content;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-top: 5px;
+  border-bottom: 1px black solid;
+  z-index: 1000;
+  position: relative;
+}
+
+.data-list > option{
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  padding: 0.5em;
+  border: 1px solid gray;
+  border-top: none;
+}
+
+.data-list > option:hover {
+  background-color: rgb(237, 235, 235);
 }
